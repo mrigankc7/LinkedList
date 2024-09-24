@@ -1,0 +1,89 @@
+/****************************************************************
+
+ Following is the class structure of the Node class:
+
+ class Node {
+     public int data;
+     public Node next;
+     public Node prev;
+
+     Node()
+     {
+         this.data = 0;
+         this.next = null;
+         this.prev = null;
+     }
+     Node(int data)
+     {
+         this.data = data;
+         this.next = null;
+         this.prev = null;
+     }
+     Node(int data, Node next, Node prev)
+     {
+         this.data = data;
+         this.next = next;
+         this.prev = prev;
+     }
+ }
+
+ *****************************************************************/
+
+public class Solution {
+    public static Node deleteAllOccurrences(Node head, int k) {
+        // Write your code here.
+        if(head==null || head.next==null)
+        {
+            if(head==null)
+                return null;
+            else if(head.data==k)
+            {
+                    return null;
+            }
+            else
+                return head;
+        }
+        Node temp=head;
+        while(temp!=null)
+        {
+            if(temp.data==k && temp==head)
+            {
+                if(temp.next==null)
+                {
+                    return null;
+                }
+                Node temp1=temp;
+                temp.next.prev=null;
+                temp=temp.next;
+                temp1.next=null;
+                head=temp;
+            }
+            else if(temp.data==k && temp!=head)
+            {
+                if(temp.next==null)
+                {
+                        Node temp1=temp;
+                        temp.prev.next=null;
+                        temp=temp.next;
+                        temp1.prev=null;
+                        temp1.next=null;
+                    
+                    
+                }
+                else{
+                    Node temp1=temp;
+                    temp.next.prev=temp.prev;
+                    temp.prev.next=temp.next;
+                    temp=temp.next;
+                    temp1.prev=null;
+                    temp1.next=null;
+                    
+                }
+                
+            }
+            else
+                temp=temp.next;
+        }
+    return head;
+    }
+}
