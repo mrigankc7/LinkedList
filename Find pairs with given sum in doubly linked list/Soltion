@@ -1,0 +1,31 @@
+public class Solution {
+
+    public static ArrayList<int[]> findPair(Node head, int k) {
+        // Write your code here.
+        ArrayList<int[]> al= new ArrayList<int[]>();
+        Node temp=head;
+        while(temp.next!=null)
+        {
+            temp=temp.next;
+        }
+        Node tail=temp;
+        temp=head;
+        while(temp.data < tail.data)
+        {
+            if(temp.data + tail.data == k )
+            {
+                al.add(new int[]{temp.data,tail.data});
+                temp=temp.next;
+                tail=tail.prev;
+            }
+            else if(temp.data + tail.data < k)
+                temp=temp.next;
+            else{
+                tail=tail.prev;
+            }
+                
+        }
+        return al;
+    }
+
+}
