@@ -1,0 +1,37 @@
+public class Solution {
+    public static Node flattenLinkedList(Node head) {
+        //Write your code here
+        if(head==null || head.next==null)
+            return head;
+        Node mergeHead=flattenLinkedList(head.next);
+        return merge(head,mergeHead);
+    }
+    public static Node merge(Node l1,Node l2)
+    {
+        Node dummy=new Node(-1);
+        Node res=dummy;
+
+        while(l1!=null && l2!=null)
+        {
+            if(l1.data <= l2.data)
+            {
+                res.child=l1;
+                res=res.child;
+                l1=l1.child;
+            }
+            else{
+                res.child=l2;
+                res=res.child;
+                l2=l2.child;
+            }
+            res.next=null;
+        }
+        if(l1!=null)
+            res.child=l1;
+        else
+            res.child=l2;
+
+        return dummy.child;
+
+    }
+}
